@@ -21,7 +21,7 @@ public class PlayerController {
     @Autowired
     private PlayerService playerService;
 
-    @RequestMapping(value = "/mockdata")
+    @RequestMapping(value = "/mockdata/")
     private List<Player> setup() {
         Player player1 = new Player();
         player1.setName("Chris Diehl");
@@ -63,21 +63,23 @@ public class PlayerController {
         return playerService.sortPlayersByRankAscending(players);
     }
 
-    @RequestMapping(value = "/addplayer/{name}")
+    @RequestMapping(value = "/add/{name}/")
     public Player addPlayer(@PathVariable String name) {
         Player player = new Player();
         player.setName(name);
         return playerService.savePlayer(player);
     }
 
-    @RequestMapping(value = "/updateplayer/{id}/{name}/{rank}")
-    public Player updatePlayer(@PathVariable Long id,
+    @RequestMapping(value = "/update/{id}/{name}/{rank}/")
+    public List<Player> updatePlayer(@PathVariable Long id,
                                @PathVariable String name,
                                @PathVariable Integer rank) {
         Player player = new Player();
         player.setId(id);
         player.setName(name);
         player.setRank(rank);
-        return playerService.savePlayer(player);
+        return playerService.sortPlayersByRankAscending(playerService.saveAllPlayers(
+                playerService.updateRankOffset(player, playerService.getAllPlayers())));
+
     }
 }

@@ -70,6 +70,16 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
+    public List<Player> updateRankOffset(Player player, List<Player> players) {
+        players.stream().filter(listPlayer -> player.getId() == listPlayer.getId()).forEach(player1 -> player1.setRank(player.getRank()));
+        players.stream().filter(listPlayer -> (listPlayer.getRank() != null &&
+                listPlayer.getRank() >= player.getRank() &&
+                listPlayer.getId() != player.getId())).
+                forEach(listPlayer -> listPlayer.setRank(listPlayer.getRank() + 1));
+        return players;
+    }
+
+    @Override
     public boolean deletePlayer(Long playerId) {
         playerRepository.delete(playerId);
         return true;

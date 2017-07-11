@@ -32,13 +32,15 @@ public interface PlayerService {
     public List<Player> swapPlayersRank (Player player1, Player player2);
 
     /**
-     *
+     * Saves Player and does NOT adjust the other players around him.
      * @param player
      * @return
      */
     public Player savePlayer(Player player);
 
     public List<Player> saveAllPlayers(List<Player> players);
+
+    public List<Player> updateRankOffset(Player player, List<Player> players);
 
     public boolean deletePlayer (Long playerId);
 

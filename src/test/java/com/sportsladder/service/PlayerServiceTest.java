@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -191,6 +192,23 @@ public class PlayerServiceTest {
         playerService.savePlayer(players.get(1));
 
         Assert.assertEquals(0, playerService.getUnrankedPlayers().size());
+    }
+
+    @Test
+    public void updateRankOffset() {
+        Player player = new Player();
+        player.setId(4l);
+        player.setName("Jide Laoye");
+        player.setRank(2);
+        List<Player> newPlayers = playerService.updateRankOffset(player, getPlayersWithIds());
+        List<Player> expectedPlayers = getPlayersWithIds();
+        expectedPlayers.get(1).setRank(3);
+        expectedPlayers.get(2).setRank(4);
+        expectedPlayers.get(3).setRank(2);
+        Collections.sort(expectedPlayers);
+        Collections.sort(newPlayers);
+        Assert.assertEquals(expectedPlayers, newPlayers);
+
     }
 
 }
