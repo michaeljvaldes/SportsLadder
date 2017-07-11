@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.sportsladder.service.PlayerServiceTest
+-------------------------------------------------------------------------------
+Tests run: 12, Failures: 0, Errors: 0, Skipped: 3, Time elapsed: 1.895 sec - in com.sportsladder.service.PlayerServiceTest
