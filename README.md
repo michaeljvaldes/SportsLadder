@@ -41,7 +41,8 @@ The ladder is posted in the ping pong room.  Anyone in the ladder system can cha
 9.	Honor Code
 Players are expected to be honest and respect the rules of the system. The first time a player is found cheating the player shall be demoted 3 places. The second violation will lead to a ban of the player from the challenge ladder for a month and public shaming in the office.  
 
-=======
+---
+
 Used the following tutorials to get started:
 
 Spring boot: http://javabeat.net/spring-data-jpa/
