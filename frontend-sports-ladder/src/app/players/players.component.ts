@@ -6,23 +6,15 @@ import {Component, OnInit, Directive, ElementRef, Input} from '@angular/core';
   styleUrls: ['players.component.css']
 })
 
-
-@Directive({
-  selector: '[contenteditableModel]',
-  host: {
-    '(blur)': 'onBlur()'
-  }
-})
-
 export class PlayersComponent implements OnInit {
-  @Input('contenteditableModel') model: any;
   newPlayerPending:boolean = true;
-  newPlayerName:string = "Player Name";
+  newPlayerName:string = "";
   newPlayerRank:number = null;
-
-  constructor(private elRef: ElementRef) { }
   players = [["Mr Milk", 1], ["Mr Shake", 2]];
 
+  errors = [];
+
+  constructor(private elRef: ElementRef) { }
   ngOnInit() {
   }
 
@@ -31,16 +23,51 @@ export class PlayersComponent implements OnInit {
   }
 
   onSavePlayer() {
-    this.newPlayerPending = true;
-    this.players.push([this.newPlayerName, this.newPlayerRank ]);
+    this.errors = [];
+    this.validateNewPlayer(this.newPlayerName, this.newPlayerRank);
+    if (this.errors.length == 0) {
+      this.players.push([this.newPlayerName, this.newPlayerRank]);
+      this.clearPendingPlayer();
+    }
+  }
+
+  /**
+   * I don't have internet and can't search how to type the return of functions :|
+   * Sorry for the non pure functions.
+   * @param name
+   * @param rank
+   */
+  validateNewPlayer(name:string, rank:number) {
+    if (name == "") {
+      this.errors.push("Name cannot be empty");
+    }
+    // Should we allow unranked people on the ladder or should everyone have a rank?
+    if (rank == null) {
+      this.errors.push("Rank cannot be empty");
+    }
   }
 
   onCancelAdd() {
-    this.newPlayerPending = true;
+    this.clearPendingPlayer();
   }
 
-  onBlur() {
-    var value = this.elRef.nativeElement.innerText
-    this.newPlayerName = value
+  clearPendingPlayer() {
+    this.newPlayerPending = true;
+    this.newPlayerRank=null;
+    this.newPlayerName = "";
+    this.errors = [];
   }
+
+  onUpdatePlayerName(event:Event) {
+    console.log(this.newPlayerName);
+    this.newPlayerName = (<HTMLInputElement> event.target).value;
+    console.log(this.newPlayerName);
+  }
+
+  onUpdatePlayerRank(event:Event) {
+    this.newPlayerRank = Number.parseFloat((<HTMLInputElement> event.target).value);
+    console.log(this.newPlayerRank);
+    console.log((<HTMLInputElement> event.target).value);
+  }
+
 }

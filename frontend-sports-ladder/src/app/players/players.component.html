@@ -1,33 +1,32 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-4">
+    <div class="col-md-4">
       <h3>Ranking</h3>
-      <div class="table" width="100%">
+      <div *ngFor='let error of errors' class="alert alert-danger">
+        <p>{{error}}</p>
+      </div>
+      <table class="table table-striped" width="100%">
         <thead>
         <th>Name</th>
         <th>Position</th>
         </thead>
         <tbody>
-        <!--<tr>-->
-          <!--<td>Mr. Milk</td>-->
-          <!--<td>3</td>-->
-        <!--</tr>-->
-        <!--<tr>-->
-          <!--<td>Mr Shake</td>-->
-          <!--<td>2</td>-->
-        <!--</tr>-->
         <tr *ngFor="let player of players">
           <td>{{player[0]}}</td>
           <td>{{player[1]}}</td>
         </tr>
 
         <tr *ngIf='!newPlayerPending'>
-          <td contenteditable>{{newPlayerName}}</td>
-          <td contenteditable>{{newPlayerRank}}</td>
+          <!-- TODO: How to make this thing not break the table formatting when it appears?-->
+          <td><input type="text"  class="form-control" (input)="onUpdatePlayerName($event)"/></td>
+          <!-- TODO: How to make this only a positive number?-->
+          <td><input type="number"  class="form-control" (input)="onUpdatePlayerRank($event)" /></td>
         </tr>
         </tbody>
+        <!-- <input type="text" class="form-control" (input)="onUpdateServerName($event)"> -->
 
-      </div>
+
+      </table>
       <button type="button" class="btn btn-primary" *ngIf="newPlayerPending" (click)='onAddPlayer()'>++++</button>
       <button type="button" class="btn btn-primary" *ngIf='!newPlayerPending' (click)='onSavePlayer()'>Save</button>
       <button type="button" class="btn btn-primary" *ngIf='!newPlayerPending' (click)='onCancelAdd()'>Cancel</button>
