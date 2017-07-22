@@ -58,16 +58,16 @@ export class PlayersComponent implements OnInit {
     this.errors = [];
   }
 
+  /**
+   * TODO: We probably don't need these funtions below, a data binding should do the job.
+   * @param event
+   */
   onUpdatePlayerName(event:Event) {
-    console.log(this.newPlayerName);
     this.newPlayerName = (<HTMLInputElement> event.target).value;
-    console.log(this.newPlayerName);
   }
 
   onUpdatePlayerRank(event:Event) {
     this.newPlayerRank = Number.parseFloat((<HTMLInputElement> event.target).value);
-    console.log(this.newPlayerRank);
-    console.log((<HTMLInputElement> event.target).value);
   }
 
 }
