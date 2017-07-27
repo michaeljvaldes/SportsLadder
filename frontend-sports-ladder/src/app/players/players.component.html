@@ -1,35 +1,33 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-4">
-      <h3>Ranking</h3>
-      <div *ngFor='let error of errors' class="alert alert-danger">
-        <p>{{error}}</p>
-      </div>
-      <table class="table table-striped" width="100%">
-        <thead>
-        <th>Name</th>
-        <th>Position</th>
-        </thead>
-        <tbody>
-        <tr *ngFor="let player of players">
-          <td>{{player[0]}}</td>
-          <td>{{player[1]}}</td>
-        </tr>
-
-        <tr *ngIf='!newPlayerPending'>
-          <!-- TODO: How to make this thing not break the table formatting when it appears?-->
-          <td><input type="text"  class="form-control" (input)="onUpdatePlayerName($event)"/></td>
-          <!-- TODO: How to make this only a positive number?-->
-          <td><input type="number"  class="form-control" (input)="onUpdatePlayerRank($event)" /></td>
-        </tr>
-        </tbody>
-        <!-- <input type="text" class="form-control" (input)="onUpdateServerName($event)"> -->
-
-
-      </table>
-      <button type="button" class="btn btn-primary" *ngIf="newPlayerPending" (click)='onAddPlayer()'>++++</button>
-      <button type="button" class="btn btn-primary" *ngIf='!newPlayerPending' (click)='onSavePlayer()'>Save</button>
-      <button type="button" class="btn btn-primary" *ngIf='!newPlayerPending' (click)='onCancelAdd()'>Cancel</button>
+<div class="row">
+  <div class="col-md-6">
+    <h3>Ranking</h3>
+    <div *ngFor='let error of errors' class="alert alert-danger">
+      <p>{{error}}</p>
     </div>
+    <div class="row">
+        <a href="#" class="list-group-item clearfix" *ngFor="let player of players">
+        <span class="col-sm-9 pull-left">
+          <h4 class="list-group-item-heading">{{player.name}}</h4>
+        </span>
+          <span class="col-sm-3 pull-right"><p class="list-group-item-text">{{player.rank}}</p>
+      </span>
+        </a>
+    </div>
+
+    <div class="row" *ngIf='!newPlayerPending'>
+      <div class="col-sm-9">
+        <label for="name">Name</label>
+        <input type="text" id="name" class="form-control" (input)="onUpdatePlayerName($event)">
+      </div>
+      <div class="col-sm-3">
+        <label for="rank">Rank</label>
+        <input type="number" id="rank" class="form-control" (input)="onUpdatePlayerRank($event)" >
+      </div>
+    </div>
+    <hr>
+
+    <button type="button" class="btn btn-primary" *ngIf="newPlayerPending" (click)='onAddPlayer()'><span class="glyphicon glyphicon-plus"></span></button>
+    <button type="button" class="btn btn-success" *ngIf='!newPlayerPending' (click)='onSavePlayer()'><span class="glyphicon glyphicon-ok"></span></button>
+    <button type="button" class="btn btn-danger" *ngIf='!newPlayerPending' (click)='onCancelAdd()'><span class="glyphicon glyphicon-remove"></span></button>
   </div>
 </div>

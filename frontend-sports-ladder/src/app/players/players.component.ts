@@ -1,4 +1,6 @@
-import {Component, OnInit, Directive, ElementRef, Input} from '@angular/core';
+import {Component, OnInit, ElementRef} from '@angular/core';
+import {Player} from "./player.model";
+import {trigger, transition, style, animate} from "@angular/animations";
 
 @Component({
   selector: 'app-players',
@@ -10,7 +12,7 @@ export class PlayersComponent implements OnInit {
   newPlayerPending:boolean = true;
   newPlayerName:string = "";
   newPlayerRank:number = null;
-  players = [["Mr Milk", 1], ["Mr Shake", 2]];
+  players:Player[] = [new Player("Mr Milk", 1), new Player("Mr Shake", 2)];
 
   errors = [];
 
@@ -26,7 +28,7 @@ export class PlayersComponent implements OnInit {
     this.errors = [];
     this.validateNewPlayer(this.newPlayerName, this.newPlayerRank);
     if (this.errors.length == 0) {
-      this.players.push([this.newPlayerName, this.newPlayerRank]);
+      this.players.push(new Player(this.newPlayerName, this.newPlayerRank));
       this.clearPendingPlayer();
     }
   }
