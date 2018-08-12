@@ -1,7 +1,7 @@
 package com.sportsladder.service;
 
+import com.sportsladder.domain.Challenge;
 import com.sportsladder.domain.Player;
-
 import java.util.List;
 
 /**
@@ -9,6 +9,8 @@ import java.util.List;
  */
 public interface PlayerService {
 
+
+    public Player getPlayerById(Long id);
     /**
      * Gets the list of all players in the DB
      * @return the unordered list of players
@@ -47,4 +49,7 @@ public interface PlayerService {
     public List<Player> getUnrankedPlayers ();
 
     public List<Player> adjustRankGaps (List<Player> players);
+
+    public Player completeChallenge(Challenge challenge, Player winner);
+
 }

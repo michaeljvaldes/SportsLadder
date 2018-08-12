@@ -1,14 +1,14 @@
 package com.sportsladder.service;
 
 import com.sportsladder.dataaccess.PlayerRepository;
+import com.sportsladder.domain.Challenge;
 import com.sportsladder.domain.Player;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by Felipe Leite on 7/1/2017.
@@ -18,6 +18,10 @@ public class PlayerServiceImpl implements PlayerService {
 
     @Autowired
     PlayerRepository playerRepository;
+
+    public Player getPlayerById(Long id){
+        return playerRepository.findPlayerById(id);
+    }
 
     @Override
     public List<Player> getAllPlayers() {
@@ -112,4 +116,21 @@ public class PlayerServiceImpl implements PlayerService {
         return !players.stream().filter(player -> player.getRank() != null).
                 anyMatch(player -> currentPlayer.getRank() -1 == player.getRank());
     }
+
+    public Player completeChallenge(Challenge challenge, Player winner) {
+        if (winner.equals(challenge.getChallenger())) {
+            List<Player> affectedPlayers = playerRepository
+                    .findAllByRankGreaterThanAndRankLessThan(challenge.getDefender().getRank(), challenge.getChallenger().getRank());
+            affectedPlayers.add(challenge.getDefender());
+            affectedPlayers.add(challenge.getChallenger());
+
+            for (Player player : affectedPlayers) {
+                player.setRank(player.getRank() + 1);
+            }
+            challenge.getChallenger().setRank(challenge.getDefender().getRank() - 1);
+            saveAllPlayers(affectedPlayers);
+        }
+        return winner;
+    }
+
 }

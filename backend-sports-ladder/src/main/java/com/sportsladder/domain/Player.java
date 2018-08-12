@@ -1,8 +1,11 @@
 package com.sportsladder.domain;
 
-import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Comparator;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * Created by Felipe Leite on 7/1/2017.
@@ -20,6 +23,7 @@ public class Player implements Serializable, Comparable {
 
     @Column(name="rank")
     Integer rank;
+
 
     public Long getId() {
         return id;
@@ -57,6 +61,8 @@ public class Player implements Serializable, Comparable {
 
     @Override
     public boolean equals(Object o) {
+        if(o.getClass() != Player.class)
+            return false;
         Player otherPlayer = (Player) o;
         if (this.getId() == otherPlayer.getId() &&
                 this.getRank() == otherPlayer.getRank() &&
