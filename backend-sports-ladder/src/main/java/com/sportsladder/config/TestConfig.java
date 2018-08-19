@@ -13,12 +13,10 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
-/**
- * Created by Felipe Leite on 7/1/2017.
- */
+
 @Configuration
 @EnableJpaRepositories(basePackages={"com.sportsladder.dataaccess"})
-@ComponentScan(basePackages = {"com.sportsladder.service", "com.sportsladder.dataaccess"})
+@ComponentScan
 public class TestConfig {
 
     @Bean
@@ -50,4 +48,6 @@ public class TestConfig {
         txManager.setEntityManagerFactory( entityManagerFactory() );
         return txManager;
     }
+
+
 }

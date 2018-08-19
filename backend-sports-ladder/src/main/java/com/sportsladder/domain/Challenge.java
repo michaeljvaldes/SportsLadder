@@ -14,9 +14,6 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
-/**
- * Created by Felipe Leite on 7/1/2017.
- */
 @Entity
 public class Challenge implements Serializable {
 
@@ -27,17 +24,17 @@ public class Challenge implements Serializable {
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @NotFound(action= NotFoundAction.IGNORE)
-    @JoinColumn(name = "challenger")
+    @JoinColumn(name = "challengerId")
     private Player challenger;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @NotFound(action= NotFoundAction.IGNORE)
-    @JoinColumn(name = "defender")
+    @JoinColumn(name = "defenderId")
     private Player defender;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @NotFound(action= NotFoundAction.IGNORE)
-    @JoinColumn(name = "winner")
+    @JoinColumn(name = "winnerId")
     private Player winner;
 
     @Column(name="status")

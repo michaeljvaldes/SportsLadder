@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * Created by Felipe Leite on 7/1/2017.
- */
 @RestController
 @RequestMapping("/players")
 public class PlayerController {
