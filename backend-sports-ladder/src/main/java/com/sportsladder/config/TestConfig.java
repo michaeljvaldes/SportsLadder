@@ -16,7 +16,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
 @EnableJpaRepositories(basePackages={"com.sportsladder.dataaccess"})
-@ComponentScan
+@ComponentScan(basePackages = {"com.sportsladder.service", "com.sportsladder.dataaccess"})
 public class TestConfig {
 
     @Bean
