@@ -114,8 +114,8 @@ public class Challenge implements Serializable {
         return status;
     }
 
-    public void setStatus(ChallengeStatus status) {
-        this.status = status.getId();
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
 
