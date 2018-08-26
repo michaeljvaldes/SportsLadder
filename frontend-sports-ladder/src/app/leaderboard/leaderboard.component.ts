@@ -19,7 +19,9 @@ export class LeaderboardComponent implements OnInit {
 
 getPlayers(): void {
     this.apiService.getAllPlayers()
-      .subscribe(players => this.players = players);
+      .subscribe(players =>
+      this.players = players
+      );
 }
 
     selectedPlayer: Player;

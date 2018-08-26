@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http'
 import {Player} from './player';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import {map} from "rxjs/internal/operators";
 
 const API_URL = environment.apiUrl;
 
@@ -19,13 +20,17 @@ export class ApiService {
 
 
   public getAllPlayers(): Observable<Player[]> {
-    return this.http
-      .get(API_URL + '/leaderboard')
-      .map(response => {
-        const players = response;
-        return players.map((player) => new
-        Player(player));
 
-      })
-  }
+    return this.http
+      .get<Player[]>(API_URL + '/leaderboard')
+      }
+
+  // return this.http.get<Hero[]>(this.heroesUrl)
+
+
+  // getAll() {
+  //   return this.http
+  //     .get<any[]>(this.url)
+  //     .pipe(map(data => data));
+  // }
 }
