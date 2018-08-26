@@ -2,6 +2,7 @@ package com.sportsladder.service;
 
 import com.sportsladder.dataaccess.ChallengeRepository;
 import com.sportsladder.domain.Challenge;
+import com.sportsladder.domain.ChallengeStatus;
 import com.sportsladder.domain.Player;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -96,7 +97,7 @@ public class ChallengeServiceImpl implements ChallengeService {
     public Challenge completeChallenge(Challenge challenge, Player winner) {
         challenge.setWinner(winner);
         challenge.setCompletionDate(LocalDateTime.now());
-        challenge.setStatus(2);
+        challenge.setStatus(ChallengeStatus.CHALLENGE_STATUS_COMPLETE);
         challengeRepository.save(challenge);
         return challenge;
     }

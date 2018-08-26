@@ -1,8 +1,6 @@
 package com.sportsladder.domain;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by Michael Valdes on 8/10/2018.
@@ -22,13 +20,10 @@ public enum ChallengeStatus {
     }
 
 
-    public ChallengeStatus getChallengeStatusFromId(int id){
-        List<ChallengeStatus> challengeStatuses = Arrays.stream(ChallengeStatus.values())
+    public static ChallengeStatus getChallengeStatusFromId(int id){
+        return Arrays.stream(ChallengeStatus.values())
                 .filter(challengeStatus -> challengeStatus.getId() == id)
-                .collect(Collectors.toList());
-        if(challengeStatuses.size() != 0)
-            return challengeStatuses.get(0);
-        else
-            return null;
+                .findFirst()
+                .orElse(null);
     }
 }

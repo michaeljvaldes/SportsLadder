@@ -2,6 +2,7 @@ package com.sportsladder.service;
 
 import com.sportsladder.config.TestConfig;
 import com.sportsladder.domain.Challenge;
+import com.sportsladder.domain.ChallengeStatus;
 import com.sportsladder.domain.Player;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -122,7 +123,7 @@ public class ChallengeServiceImplTest {
         List<Challenge> expectedChallenges = new ArrayList<>();
         Challenge challenge1 = new Challenge(players.get(0), players.get(1));
         challenge1.setWinner(players.get(0));
-        challenge1.setStatus(2);
+        challenge1.setStatus(ChallengeStatus.CHALLENGE_STATUS_COMPLETE);
         challenge1.setCompletionDate(LocalDateTime.now());
         Challenge challenge2 = new Challenge(players.get(0), players.get(2));
         expectedChallenges.add(challenge1);
@@ -150,7 +151,7 @@ public class ChallengeServiceImplTest {
     public void getActiveChallengeByPlayer() throws Exception {
         Challenge challenge1 = new Challenge(players.get(0), players.get(1));
         challenge1.setWinner(players.get(0));
-        challenge1.setStatus(2);
+        challenge1.setStatus(ChallengeStatus.CHALLENGE_STATUS_COMPLETE);
         challenge1.setCompletionDate(LocalDateTime.now());
 
         List<Challenge> expectedChallenges = new ArrayList<>();
@@ -194,7 +195,7 @@ public class ChallengeServiceImplTest {
     public void getRecentChallenges() throws Exception {
         Challenge challenge1 = new Challenge(players.get(0), players.get(1));
         challenge1.setWinner(players.get(0));
-        challenge1.setStatus(2);
+        challenge1.setStatus(ChallengeStatus.CHALLENGE_STATUS_COMPLETE);
         challenge1.setCompletionDate(LocalDateTime.now());
         challengeService.saveChallenge(challenge1);
 
