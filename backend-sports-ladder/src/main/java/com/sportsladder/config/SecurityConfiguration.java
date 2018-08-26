@@ -60,16 +60,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/").permitAll()
                 .antMatchers("/api/login").permitAll()
                 .antMatchers("/api/registration").permitAll()
-                .antMatchers("/api/admin/**").hasAuthority("Admin").anyRequest()
-                .authenticated().and().csrf().disable().formLogin()
-                .loginPage("/api/login").failureUrl("/api/login?error=true")
-                .defaultSuccessUrl("/api/players/")
-                .usernameParameter("email")
-                .passwordParameter("password")
-                .and().logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/api/logout"))
-                .logoutSuccessUrl("/api/").and().exceptionHandling()
-                .accessDeniedPage("/api/access-denied");
+                .antMatchers("/api/players/").permitAll();
+//                .antMatchers("/api/admin/**").hasAuthority("Admin").anyRequest()
+//                .authenticated().and().csrf().disable().formLogin()
+//                .loginPage("/api/login").failureUrl("/api/login?error=true")
+//                .defaultSuccessUrl("/api/players/")
+//                .usernameParameter("email")
+//                .passwordParameter("password")
+//                .and().logout()
+//                .logoutRequestMatcher(new AntPathRequestMatcher("/api/logout"))
+//                .logoutSuccessUrl("/api/").and().exceptionHandling()
+//                .accessDeniedPage("/api/access-denied");
         http.csrf().disable();
         http.headers().frameOptions().disable();
     }

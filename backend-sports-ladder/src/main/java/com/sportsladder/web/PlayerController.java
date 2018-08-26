@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/players")
+@RequestMapping("/")
 public class PlayerController {
 
     @Autowired
@@ -65,7 +65,7 @@ public class PlayerController {
 
 
 
-    @RequestMapping(value = "/")
+    @RequestMapping(value = "leaderboard")
     public List<Player> getPlayers() {
         List<Player> players = playerService.getAllPlayers();
         return playerService.sortPlayersByRankAscending(players);
