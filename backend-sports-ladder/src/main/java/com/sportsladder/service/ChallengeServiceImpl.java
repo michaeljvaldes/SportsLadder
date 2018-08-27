@@ -51,7 +51,7 @@ public class ChallengeServiceImpl implements ChallengeService {
 
     public Challenge getActiveChallengeByPlayer(Player player) {
         List<Challenge> challenges = getChallengesByPlayer(player).stream()
-                .filter(challenge -> challenge.getStatus()==1)
+                .filter(challenge -> challenge.getStatus()==ChallengeStatus.CHALLENGE_STATUS_ACTIVE)
                 .collect(Collectors.toList());
         if(challenges.size() == 1){
             return challenges.get(0);
@@ -72,13 +72,13 @@ public class ChallengeServiceImpl implements ChallengeService {
         activeChallenges.add(getActiveChallengeByPlayer(defender));
         while(activeChallenges.remove(null));
 
-        if(activeChallenges.size() > 0)
+        if(!activeChallenges.isEmpty())
             return null;
 
         if(!arePlayersWithinChallengeRange(challenger, defender))
             return null;
 
-        if(getRecentChallenges(challenger, defender).size() > 0)
+        if(!getRecentChallenges(challenger, defender).isEmpty())
             return null;
 
         Challenge challenge = new Challenge(challenger, defender);

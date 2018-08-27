@@ -176,7 +176,7 @@ public class ChallengeServiceImplTest {
         Challenge challenge1 = new Challenge(players.get(0), players.get(1));
         challengeService.completeChallenge(challenge1, players.get(0));
         Assert.assertTrue(players.get(0).equals(challenge1.getWinner()));
-        Assert.assertTrue(Integer.valueOf(2).equals(challenge1.getStatus()));
+        Assert.assertTrue(ChallengeStatus.CHALLENGE_STATUS_COMPLETE.equals(challenge1.getStatus()));
         Assert.assertTrue(challenge1.getCompletionDate() != null);
     }
 
@@ -188,7 +188,7 @@ public class ChallengeServiceImplTest {
 
         Assert.assertTrue(challenge.equals(challenge1));
         Assert.assertTrue(challenge.equals(challenge2));
-        Assert.assertTrue(Integer.valueOf(1).equals(challenge.getStatus()));
+        Assert.assertTrue(ChallengeStatus.CHALLENGE_STATUS_ACTIVE.equals(challenge.getStatus()));
     }
 
     @Test

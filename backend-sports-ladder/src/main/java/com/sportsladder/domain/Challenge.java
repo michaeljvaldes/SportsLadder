@@ -110,8 +110,8 @@ public class Challenge implements Serializable {
         this.winner = winner;
     }
 
-    public Integer getStatus() {
-        return status;
+    public ChallengeStatus getStatus() {
+        return ChallengeStatus.getChallengeStatusFromId(status);
     }
 
     public void setStatus(ChallengeStatus status) {
